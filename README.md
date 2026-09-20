@@ -37,14 +37,6 @@ lib/
 ├── widgets/
 ├── firebase_options.dart
 └── main.dart
-```
-
-## How to Run
-
-```bash
-flutter pub get
-flutter run
-```
 
 Firebase Authentication with Email/Password should be enabled for the project.
 
