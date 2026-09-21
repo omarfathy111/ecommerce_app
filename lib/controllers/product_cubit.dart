@@ -88,7 +88,6 @@ class ProductCubit extends Cubit<ProductState> {
       ...allProducts
           .map((product) => product.category)
           .toSet()
-          .toList(),
     ];
   }
 }

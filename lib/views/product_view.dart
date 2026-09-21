@@ -87,25 +87,38 @@ class ProductView extends StatelessWidget {
           // Categories
           BlocBuilder<ProductCubit, ProductState>(
             builder: (context, state) {
-              final categories =
-                  context.read<ProductCubit>().getCategories();
+              final cubit = context.read<ProductCubit>();
+              final categories = cubit.getCategories();
 
               return SizedBox(
                 height: 45,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
                   itemCount: categories.length,
                   itemBuilder: (context, index) {
                     final category = categories[index];
 
+                    final isSelected =
+                        cubit.selectedCategory == category;
+
                     return Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isSelected
+                              ? Colors.blue
+                              : Colors.grey[300],
+                          foregroundColor: isSelected
+                              ? Colors.white
+                              : Colors.black,
+                        ),
                         onPressed: () {
-                          context
-                              .read<ProductCubit>()
-                              .filterProductsByCategory(category);
+                          cubit.filterProductsByCategory(
+                            category,
+                          );
                         },
                         child: Text(category),
                       ),
@@ -180,4 +193,3 @@ class ProductView extends StatelessWidget {
     );
   }
 }
-
